@@ -48,66 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─────────────────────────────────────────
-     HERO — entrance animation
-     ───────────────────────────────────────── */
-  const heroTl = gsap.timeline({
-    defaults: { ease: 'power3.out' },
-  });
-
-  heroTl
-    .from('.hero__video, .hero__img', {
-      scale: 1.15,
-      duration: 2.2,
-      ease: 'power2.out',
-    })
-    .from(
-      '.hero__title-word',
-      {
-        yPercent: 130,
-        opacity: 0,
-        duration: 1.1,
-        stagger: 0.18,
-      },
-      '-=1.4'
-    )
-    .from(
-      '.hero__sub',
-      {
-        y: 30,
-        opacity: 0,
-        duration: 0.9,
-      },
-      '-=0.5'
-    )
-    .from(
-      '.hero__btn',
-      {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-      },
-      '-=0.45'
-    )
-    .from(
-      '.hero__scroll',
-      {
-        opacity: 0,
-        duration: 1,
-      },
-      '-=0.3'
-    );
-
   /* ═══════════════════════════════════════════
-     SECTION 1 — SCROLL ANIMATION (CANVAS FRAME SEQUENCE)
-     Pin the section and scrub through video frames
+     HERO — PINNED FRAME SCROLL ANIMATION
+     Full viewport frame sequence controlled by scroll
      ═══════════════════════════════════════════ */
-  const scrollSection = document.querySelector('.scroll-anim');
-  const scrollPanels = gsap.utils.toArray('.scroll-anim__panel');
-  const scrollTexts = scrollPanels.map((p) => p.querySelector('.scroll-anim__text'));
+  const heroSection = document.querySelector('.hero-scroll');
   const canvas = document.getElementById('scrollCanvas');
+  const introPanel = document.querySelector('.hero-scroll__panel--intro');
+  const allPanels = gsap.utils.toArray('.hero-scroll__panel');
+  const narrativePanels = allPanels.filter((p) => !p.classList.contains('hero-scroll__panel--intro'));
 
-  if (scrollSection && canvas) {
+  if (heroSection && canvas) {
     const context = canvas.getContext('2d');
     const frameCount = 192;
     const currentFrame = (index) =>
@@ -143,54 +94,115 @@ document.addEventListener('DOMContentLoaded', () => {
       images[i] = img;
     }
 
-    // GSAP ScrollTrigger timeline
-    const scrollTl = gsap.timeline({
+    // Hero entrance animation on initial page load
+    if (introPanel) {
+      gsap.from('.hero-scroll__tag', {
+        y: 20,
+        opacity: 0,
+        duration: 0.9,
+        delay: 0.2,
+        ease: 'power2.out',
+      });
+      gsap.from('.hero-scroll__title', {
+        y: 40,
+        opacity: 0,
+        duration: 1.1,
+        delay: 0.35,
+        ease: 'power3.out',
+      });
+      gsap.from('.hero-scroll__sub', {
+        y: 25,
+        opacity: 0,
+        duration: 0.9,
+        delay: 0.55,
+        ease: 'power2.out',
+      });
+      gsap.from('.hero-scroll__indicator', {
+        opacity: 0,
+        duration: 1,
+        delay: 0.8,
+        ease: 'power2.out',
+      });
+    }
+
+    // Pinned ScrollTrigger Timeline
+    const scrollDistance = (narrativePanels.length + 1) * window.innerHeight * 1.2;
+    const heroTl = gsap.timeline({
       scrollTrigger: {
-        trigger: scrollSection,
+        trigger: heroSection,
         start: 'top top',
-        end: () => `+=${scrollPanels.length * window.innerHeight * 1.25}`,
+        end: () => `+=${scrollDistance}`,
         pin: true,
-        scrub: 0.4,
+        scrub: 0.5,
         anticipatePin: 1,
       },
     });
 
-    // Scrub video frames from 0 to 191
-    scrollTl.to(
+    const totalDuration = 5;
+
+    // 1. Scrub video frames from 0 to 191
+    heroTl.to(
       playhead,
       {
         frame: frameCount - 1,
         ease: 'none',
-        duration: scrollPanels.length,
+        duration: totalDuration,
         onUpdate: render,
       },
       0
     );
 
-    // Synchronize text panels across timeline
-    const stepDuration = scrollPanels.length / scrollTexts.length;
-    scrollTexts.forEach((text, i) => {
-      const startTime = i * stepDuration;
+    // 2. Fade out intro hero panel quickly at start of scroll
+    if (introPanel) {
+      heroTl.to(
+        introPanel,
+        {
+          opacity: 0,
+          y: -40,
+          duration: 0.8,
+          ease: 'power2.in',
+        },
+        0
+      );
+    }
 
-      // Fade in + slide up
-      scrollTl.fromTo(
+    // 3. Stagger narrative panels across remaining timeline
+    const panelInterval = (totalDuration - 0.9) / narrativePanels.length;
+
+    narrativePanels.forEach((panel, i) => {
+      const text = panel.querySelector('.hero-scroll__text');
+      const cta = panel.querySelector('.hero-scroll__cta-btn');
+      const startTime = 0.9 + i * panelInterval;
+
+      // Reveal text
+      heroTl.fromTo(
         text,
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, duration: stepDuration * 0.4, ease: 'power2.out' },
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: panelInterval * 0.38, ease: 'power2.out' },
         startTime
       );
 
-      // Fade out (skip for last panel)
-      if (i < scrollTexts.length - 1) {
-        scrollTl.to(
+      // If last panel, also reveal CTA button
+      if (cta) {
+        heroTl.fromTo(
+          cta,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: panelInterval * 0.3, ease: 'power2.out' },
+          startTime + panelInterval * 0.2
+        );
+      }
+
+      // Fade out (skip for last panel so it lingers until section unpins)
+      if (i < narrativePanels.length - 1) {
+        heroTl.to(
           text,
           {
             opacity: 0,
-            y: -60,
-            duration: stepDuration * 0.35,
+            y: -50,
+            duration: panelInterval * 0.3,
             ease: 'power2.in',
           },
-          startTime + stepDuration * 0.65
+          startTime + panelInterval * 0.7
         );
       }
     });

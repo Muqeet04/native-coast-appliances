@@ -246,148 +246,24 @@ textarea {
 
 
 /* ═══════════════════════════════════════════
-   HERO
+   HERO — PINNED FRAME SCROLL ANIMATION
    ═══════════════════════════════════════════ */
-.hero {
+.hero-scroll {
   position: relative;
   height: 100vh;
   height: 100dvh;
   min-height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: var(--c-dark);
   overflow: hidden;
 }
 
-.hero__bg {
+.hero-scroll__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.hero__bg img,
-.hero__bg video,
-.hero__video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 16, 12, 0.45) 0%,
-    rgba(26, 16, 12, 0.25) 40%,
-    rgba(26, 16, 12, 0.65) 100%
-  );
-}
-
-.hero__content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 900px;
-  padding: 0 24px;
-}
-
-.hero__title {
-  font-family: var(--ff-display);
-  font-size: clamp(3.2rem, 8.5vw, 7.5rem);
-  font-weight: 700;
-  color: var(--c-white);
-  line-height: 1.05;
-  margin-bottom: 28px;
-}
-
-.hero__title em {
-  font-style: italic;
-  color: var(--c-accent);
-}
-
-.hero__title-line {
-  display: block;
-  overflow: hidden;
-}
-
-.hero__title-word {
-  display: inline-block;
-}
-
-.hero__sub {
-  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 44px;
-  letter-spacing: 0.03em;
-}
-
-.hero__btn {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--c-white);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  padding: 16px 44px;
-  transition: all 0.35s var(--ease);
-}
-
-.hero__btn:hover {
-  background: var(--c-primary);
-  border-color: var(--c-primary);
-}
-
-/* Scroll indicator */
-.hero__scroll {
-  position: absolute;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.hero__scroll span {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.hero__scroll-line {
-  width: 1px;
-  height: 44px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-  animation: scrollPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 1; transform: scaleY(1); }
-  50%      { opacity: 0.2; transform: scaleY(0.5); }
-}
-
-
-/* ═══════════════════════════════════════════
-   SECTION 1 — SCROLL ANIMATION
-   ═══════════════════════════════════════════ */
-.scroll-anim {
-  position: relative;
-  height: 100vh;
-  background: var(--c-dark);
-  overflow: hidden;
-}
-
-.scroll-anim__bg {
-  position: absolute;
-  inset: 0;
-.scroll-anim__canvas {
+.hero-scroll__canvas {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -398,47 +274,147 @@ textarea {
   display: block;
 }
 
-.scroll-anim__bg-overlay {
+.hero-scroll__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 16, 12, 0.45) 0%,
-    rgba(26, 16, 12, 0.2) 50%,
-    rgba(26, 16, 12, 0.55) 100%
+    rgba(26, 16, 12, 0.55) 0%,
+    rgba(26, 16, 12, 0.25) 45%,
+    rgba(26, 16, 12, 0.65) 100%
   );
   pointer-events: none;
 }
 
-.scroll-anim__content {
+.hero-scroll__content {
   position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
-.scroll-anim__panel {
+.hero-scroll__panel {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 clamp(24px, 4vw, 60px);
+  text-align: center;
+  padding: 0 clamp(24px, 5vw, 80px);
+  pointer-events: none;
 }
 
-.scroll-anim__text {
+/* Initial Intro Panel */
+.hero-scroll__panel--intro {
+  max-width: 900px;
+  margin: 0 auto;
+  pointer-events: auto;
+}
+
+.hero-scroll__tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: 20px;
+}
+
+.hero-scroll__title {
   font-family: var(--ff-display);
-  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  font-size: clamp(3.2rem, 8.5vw, 7.2rem);
+  font-weight: 700;
+  color: var(--c-white);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-scroll__title em {
+  font-style: italic;
+  color: var(--c-accent);
+}
+
+.hero-scroll__sub {
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+
+.hero-scroll__indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-scroll__indicator span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.hero-scroll__line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50%      { opacity: 0.2; transform: scaleY(0.5); }
+}
+
+/* Narrative scroll text panels */
+.hero-scroll__text {
+  font-family: var(--ff-display);
+  font-size: clamp(2.4rem, 6.5vw, 5.2rem);
   font-weight: 400;
   color: var(--c-white);
-  text-align: center;
   line-height: 1.15;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
   opacity: 0;
   will-change: transform, opacity;
 }
 
-.scroll-anim__text em {
+.hero-scroll__text em {
   font-style: italic;
   color: var(--c-accent);
+}
+
+.hero-scroll__cta-btn {
+  display: inline-block;
+  margin-top: 32px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  background: var(--c-primary);
+  border: 1px solid var(--c-primary);
+  padding: 16px 42px;
+  border-radius: 4px;
+  pointer-events: auto;
+  opacity: 0;
+  transition: all 0.35s var(--ease);
+}
+
+.hero-scroll__cta-btn:hover {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  transform: translateY(-2px);
 }
 
 

@@ -50,53 +50,48 @@
   </div>
 
   <!-- ═══════════════════════════════════════
-       HERO SECTION
+       HERO — PINNED FRAME SCROLL ANIMATION
+       Interactive video frame sequence driven by scroll
        ═══════════════════════════════════════ -->
-  <section class="hero" id="top">
-    <div class="hero__bg">
-      <img
-        src="peakpx (9).jpg"
-        alt="Luxurious copper-brown kitchen with island and garden view"
-        class="hero__img"
-        fetchpriority="high"
-      >
-      <div class="hero__overlay"></div>
+  <section class="hero-scroll" id="top">
+    <div class="hero-scroll__bg">
+      <canvas id="scrollCanvas" class="hero-scroll__canvas" width="1920" height="1080"></canvas>
+      <div class="hero-scroll__overlay"></div>
     </div>
-    <div class="hero__content">
-      <h1 class="hero__title">
-        <span class="hero__title-line"><span class="hero__title-word">Where craft</span></span>
-        <span class="hero__title-line"><span class="hero__title-word">meets <em>coast</em></span></span>
-      </h1>
-      <p class="hero__sub">Bespoke kitchens — hand-built, stone-topped, fitted in five days.</p>
-      <a href="#contact" class="hero__btn">Start your kitchen →</a>
-    </div>
-    <div class="hero__scroll">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════
-       SECTION 1 — SCROLL ANIMATION
-       Pinned full-screen frame sequence on scroll
-       ═══════════════════════════════════════ -->
-  <section class="scroll-anim" id="scroll-anim">
-    <div class="scroll-anim__bg">
-      <canvas id="scrollCanvas" class="scroll-anim__canvas" width="1920" height="1080"></canvas>
-      <div class="scroll-anim__bg-overlay"></div>
-    </div>
-    <div class="scroll-anim__content">
-      <div class="scroll-anim__panel">
-        <h2 class="scroll-anim__text">Kitchens that outlast<br><em>the trend</em></h2>
+    <div class="hero-scroll__content">
+      <!-- Intro Panel (Initial Hero View) -->
+      <div class="hero-scroll__panel hero-scroll__panel--intro">
+        <span class="hero-scroll__tag">Bespoke Kitchen Renovations</span>
+        <h1 class="hero-scroll__title">
+          Where craft<br>meets <em>coast</em>
+        </h1>
+        <p class="hero-scroll__sub">Hand-built, stone-topped, fitted in five days.</p>
+        <div class="hero-scroll__indicator">
+          <span>Scroll to explore</span>
+          <div class="hero-scroll__line"></div>
+        </div>
       </div>
-      <div class="scroll-anim__panel">
-        <h2 class="scroll-anim__text">Fitted by hand,<br><em>finished in stone</em></h2>
+
+      <!-- Panel 1 -->
+      <div class="hero-scroll__panel">
+        <h2 class="hero-scroll__text">Kitchens that outlast<br><em>the trend</em></h2>
       </div>
-      <div class="scroll-anim__panel">
-        <h2 class="scroll-anim__text">Colour-matched<br><em>to your walls</em></h2>
+
+      <!-- Panel 2 -->
+      <div class="hero-scroll__panel">
+        <h2 class="hero-scroll__text">Fitted by hand,<br><em>finished in stone</em></h2>
       </div>
-      <div class="scroll-anim__panel">
-        <h2 class="scroll-anim__text">Done in five days.<br><em>Yours for life.</em></h2>
+
+      <!-- Panel 3 -->
+      <div class="hero-scroll__panel">
+        <h2 class="hero-scroll__text">Colour-matched<br><em>to your walls</em></h2>
+      </div>
+
+      <!-- Panel 4 -->
+      <div class="hero-scroll__panel">
+        <h2 class="hero-scroll__text">Done in five days.<br><em>Yours for life.</em></h2>
+        <a href="#contact" class="hero-scroll__cta-btn">Start your kitchen →</a>
       </div>
     </div>
   </section>
