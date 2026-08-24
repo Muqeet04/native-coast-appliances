@@ -4,3 +4,5 @@ Thumbs.db
 
 # Large reference media not used in production site
 *.mp4
+.vercel
+.vercel
