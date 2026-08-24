@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Native Coast Appliances — Bespoke Kitchens, Made &amp; Fitted</title>
+  <meta name="description" content="Bespoke kitchen fitting and renovation — hand-sprayed cabinetry, stone worktops, and brass hardware, fitted in five days.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+       ═══════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__logo">
+        <span class="nav__logo-name">Native Coast</span>
+        <span class="nav__logo-tag">Kitchen Renovations</span>
+      </a>
+      <div class="nav__links">
+        <a href="#craft" class="nav__link">Craft</a>
+        <a href="#process" class="nav__link">Process</a>
+        <a href="#work" class="nav__link">Work</a>
+      </div>
+      <a href="#contact" class="nav__cta">Get a quote</a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#craft" class="mobile-menu__link">Craft</a>
+    <a href="#process" class="mobile-menu__link">Process</a>
+    <a href="#work" class="mobile-menu__link">Work</a>
+    <a href="#contact" class="mobile-menu__link">Get a quote</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════ -->
+  <section class="hero" id="top">
+    <div class="hero__bg">
+      <img
+        src="peakpx (9).jpg"
+        alt="Luxurious copper-brown kitchen with island and garden view"
+        class="hero__img"
+        fetchpriority="high"
+      >
+      <div class="hero__overlay"></div>
+    </div>
+    <div class="hero__content">
+      <h1 class="hero__title">
+        <span class="hero__title-line"><span class="hero__title-word">Where craft</span></span>
+        <span class="hero__title-line"><span class="hero__title-word">meets <em>coast</em></span></span>
+      </h1>
+      <p class="hero__sub">Bespoke kitchens — hand-built, stone-topped, fitted in five days.</p>
+      <a href="#contact" class="hero__btn">Start your kitchen →</a>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 1 — SCROLL ANIMATION
+       Pinned full-screen text reveal on scroll
+       ═══════════════════════════════════════ -->
+  <section class="scroll-anim" id="scroll-anim">
+    <div class="scroll-anim__bg">
+      <img
+        src="peakpx (3).jpg"
+        alt="Modern open-plan kitchen with island and skylight"
+        class="scroll-anim__bg-img"
+        loading="lazy"
+      >
+      <div class="scroll-anim__bg-overlay"></div>
+    </div>
+    <div class="scroll-anim__content">
+      <div class="scroll-anim__panel">
+        <h2 class="scroll-anim__text">Kitchens that outlast<br><em>the trend</em></h2>
+      </div>
+      <div class="scroll-anim__panel">
+        <h2 class="scroll-anim__text">Fitted by hand,<br><em>finished in stone</em></h2>
+      </div>
+      <div class="scroll-anim__panel">
+        <h2 class="scroll-anim__text">Colour-matched<br><em>to your walls</em></h2>
+      </div>
+      <div class="scroll-anim__panel">
+        <h2 class="scroll-anim__text">Done in five days.<br><em>Yours for life.</em></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CTA BANNER
+       ═══════════════════════════════════════ -->
+  <section class="cta-banner">
+    <div class="cta-banner__inner">
+      <h2 class="cta-banner__title">Supper at eight</h2>
+      <a href="#contact" class="cta-banner__btn">Start your kitchen →</a>
+      <p class="cta-banner__text">
+        A kitchen is furniture — built once, built properly.<br>
+        We make one kitchen at a time. Cabinets built and sprayed at our own bench,
+        stone templated by laser and matched by eye, and a fitting crew that has been
+        with us for years. No flat-pack carcasses, no subcontractors — just joinery,
+        stone and brass, done properly.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SECTION 2 — PICTURE BUFFER EFFECT
+       Images blur→sharp on scroll, alternating layout
+       ═══════════════════════════════════════ -->
+  <section class="buffer" id="buffer">
+    <!-- Item 1 — Image Left -->
+    <div class="buffer__item">
+      <div class="buffer__img-wrap">
+        <img
+          src="peakpx (1).jpg"
+          alt="Modern white kitchen with black accents and pendant lights"
+          class="buffer__img"
+          loading="lazy"
+        >
+      </div>
+      <div class="buffer__caption">
+        <span class="buffer__label">01</span>
+        <h3 class="buffer__heading">Scribed to the wall</h3>
+        <p class="buffer__desc">Hand-sprayed shaker fronts, scribed to walls that aren't quite straight — every edge tight, every shadow clean.</p>
+      </div>
+    </div>
+
+    <!-- Item 2 — Image Right -->
+    <div class="buffer__item buffer__item--reverse">
+      <div class="buffer__img-wrap">
+        <img
+          src="peakpx (2).jpg"
+          alt="Contemporary kitchen with wood island and bar stools"
+          class="buffer__img"
+          loading="lazy"
+        >
+      </div>
+      <div class="buffer__caption">
+        <span class="buffer__label">02</span>
+        <h3 class="buffer__heading">One slab, folded</h3>
+        <p class="buffer__desc">Book-matched marble falls over the island edge — cut wet, polished twice, landed with care.</p>
+      </div>
+    </div>
+
+    <!-- Item 3 — Image Left -->
+    <div class="buffer__item">
+      <div class="buffer__img-wrap">
+        <img
+          src="peakpx (7).jpg"
+          alt="Dark grey kitchen with copper pendant lights and stone counter"
+          class="buffer__img"
+          loading="lazy"
+        >
+      </div>
+      <div class="buffer__caption">
+        <span class="buffer__label">03</span>
+        <h3 class="buffer__heading">Warmed by degrees</h3>
+        <p class="buffer__desc">Unlacquered brass and hand-blown pendants — left to age, wired to dim, warm in every light.</p>
+      </div>
+    </div>
+
+    <!-- Item 4 — Image Right -->
+    <div class="buffer__item buffer__item--reverse">
+      <div class="buffer__img-wrap">
+        <img
+          src="peakpx (4).jpg"
+          alt="Spacious white modern kitchen with island and skylight"
+          class="buffer__img"
+          loading="lazy"
+        >
+      </div>
+      <div class="buffer__caption">
+        <span class="buffer__label">04</span>
+        <h3 class="buffer__heading">Island living</h3>
+        <p class="buffer__desc">The island is the room — prep, pour, perch, and linger. Stone on top, storage beneath, life all around.</p>
+      </div>
+    </div>
+
+    <!-- Item 5 — Image Left -->
+    <div class="buffer__item">
+      <div class="buffer__img-wrap">
+        <img
+          src="peakpx (6).jpg"
+          alt="Contemporary white kitchen with island and pendant lights"
+          class="buffer__img"
+          loading="lazy"
+        >
+      </div>
+      <div class="buffer__caption">
+        <span class="buffer__label">05</span>
+        <h3 class="buffer__heading">Any colour you name</h3>
+        <p class="buffer__desc">Hand-sprayed in our workshop, colour-matched to your walls, your mood, your morning light.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CRAFT / SERVICES SECTION
+       ═══════════════════════════════════════ -->
+  <section class="craft" id="craft">
+    <div class="craft__header">
+      <h2 class="craft__title">The craft</h2>
+      <p class="craft__intro">From a galley refit to a full open-plan kitchen with island and larder — made and fitted by one firm.</p>
+    </div>
+    <div class="craft__grid">
+      <div class="craft__card">
+        <div class="craft__card-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="8" width="32" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="4" y1="16" x2="36" y2="16" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="20" y1="16" x2="20" y2="32" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+            <circle cx="28" cy="12" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="craft__card-title">Bespoke cabinetry</h3>
+        <p class="craft__card-desc">Hand-built shaker and flat-panel fronts, sprayed any colour you can name, scribed to walls that aren't quite straight.</p>
+      </div>
+      <div class="craft__card">
+        <div class="craft__card-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 28L20 8L34 28H6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <line x1="13" y1="28" x2="20" y2="16" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+            <line x1="27" y1="28" x2="20" y2="16" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="craft__card-title">Stone worktops</h3>
+        <p class="craft__card-desc">Marble, quartzite and granite — templated by laser, book-matched by eye, folded over island ends in a waterfall.</p>
+      </div>
+      <div class="craft__card">
+        <div class="craft__card-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="14" r="6" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="20" y1="20" x2="20" y2="36" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="20" cy="14" r="2" fill="currentColor" opacity="0.4"/>
+            <path d="M14 30H26" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="craft__card-title">Brass, taps &amp; lighting</h3>
+        <p class="craft__card-desc">Unlacquered brass that ages where you touch it, and hand-blown pendants hung to the millimetre over the island.</p>
+      </div>
+      <div class="craft__card">
+        <div class="craft__card-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="28" height="28" rx="3" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M6 14H34" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M14 14V34" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="10" cy="10" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="craft__card-title">Full renovation &amp; fit</h3>
+        <p class="craft__card-desc">Strip-out, first fix, plaster and floors — one crew, one schedule, and a kitchen that lands in five working days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROCESS / TIMELINE SECTION
+       ═══════════════════════════════════════ -->
+  <section class="process" id="process">
+    <div class="process__inner">
+      <h2 class="process__title">Five days on site</h2>
+      <div class="process__timeline">
+        <div class="process__step">
+          <div class="process__step-marker">
+            <span class="process__step-num">01</span>
+          </div>
+          <div class="process__step-body">
+            <h3 class="process__step-title">Design</h3>
+            <p class="process__step-desc">Measured twice, modelled in 3D — you walk through your kitchen before we cut a single board.</p>
+          </div>
+        </div>
+        <div class="process__step">
+          <div class="process__step-marker">
+            <span class="process__step-num">02</span>
+          </div>
+          <div class="process__step-body">
+            <h3 class="process__step-title">The workshop</h3>
+            <p class="process__step-desc">Cabinets built and sprayed at our bench while your old kitchen keeps working at home.</p>
+          </div>
+        </div>
+        <div class="process__step">
+          <div class="process__step-marker">
+            <span class="process__step-num">03</span>
+          </div>
+          <div class="process__step-body">
+            <h3 class="process__step-title">The fit</h3>
+            <p class="process__step-desc">Strip-out on Monday; cabinetry, stone and brass landed, plumbed and wired by Friday.</p>
+          </div>
+        </div>
+        <div class="process__step">
+          <div class="process__step-marker">
+            <span class="process__step-num">04</span>
+          </div>
+          <div class="process__step-body">
+            <h3 class="process__step-title">Handover</h3>
+            <p class="process__step-desc">Soft-close checked, stone sealed, pendants dimmed — kettle on before we leave.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       GALLERY / WORK SECTION
+       ═══════════════════════════════════════ -->
+  <section class="gallery" id="work">
+    <div class="gallery__header">
+      <h2 class="gallery__title">Made &amp; fitted</h2>
+      <p class="gallery__intro">Shaker and stone, oak and marble — a few rooms from the last few seasons.</p>
+    </div>
+    <div class="gallery__grid">
+      <div class="gallery__item gallery__item--tall">
+        <img src="peakpx (9).jpg" alt="Copper-brown luxury kitchen with garden view" loading="lazy">
+      </div>
+      <div class="gallery__item">
+        <img src="peakpx (11).jpg" alt="Dark modern kitchen with subway tile backsplash" loading="lazy">
+      </div>
+      <div class="gallery__item">
+        <img src="peakpx (12).jpg" alt="Industrial dark wood kitchen with dining table" loading="lazy">
+      </div>
+      <div class="gallery__item gallery__item--tall">
+        <img src="peakpx (13).jpg" alt="Contemporary black and white kitchen with glass pendants" loading="lazy">
+      </div>
+      <div class="gallery__item">
+        <img src="peakpx (10).jpg" alt="Scandinavian oak kitchen with island" loading="lazy">
+      </div>
+      <div class="gallery__item">
+        <img src="peakpx (8).jpg" alt="Rustic farmhouse kitchen with industrial pendants" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT SECTION
+       ═══════════════════════════════════════ -->
+  <section class="contact" id="contact">
+    <div class="contact__inner">
+      <div class="contact__info">
+        <h2 class="contact__title">Let's make<br>your kitchen</h2>
+        <p class="contact__text">Tell us how you cook and how many you feed — we'll come and measure, free, no obligation, and price the whole job as one number.</p>
+        <div class="contact__details">
+          <a href="tel:+441234567890" class="contact__detail">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <span>01234 567 890</span>
+          </a>
+          <a href="mailto:hello@nativecoast.co.uk" class="contact__detail">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+            <span>hello@nativecoast.co.uk</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact__form-wrap">
+        <h3 class="contact__form-title">Request a quote</h3>
+        <p class="contact__form-intro">Send a photo of your kitchen as it is now and a rough idea of what you're after — colour, stone, island or not. We'll reply with honest advice and a fixed price.</p>
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="contact__field">
+            <input type="text" name="name" placeholder="Your name" required class="contact__input" autocomplete="name">
+          </div>
+          <div class="contact__field">
+            <input type="email" name="email" placeholder="Your email" required class="contact__input" autocomplete="email">
+          </div>
+          <div class="contact__field">
+            <input type="tel" name="phone" placeholder="Phone number" class="contact__input" autocomplete="tel">
+          </div>
+          <div class="contact__field">
+            <textarea name="message" placeholder="Tell us about your dream kitchen…" rows="5" class="contact__textarea"></textarea>
+          </div>
+          <button type="submit" class="contact__submit">Email the workshop →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">Native Coast</span>
+        <span class="footer__logo-tag">Kitchen Renovations</span>
+      </div>
+      <div class="footer__links">
+        <a href="#craft">Craft</a>
+        <a href="#process">Process</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <p class="footer__copy">&copy; 2026 Native Coast Appliances. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="main.js"></script>
+</body>
+</html>
