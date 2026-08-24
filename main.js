@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   heroTl
-    .from('.hero__img', {
-      scale: 1.2,
+    .from('.hero__video, .hero__img', {
+      scale: 1.15,
       duration: 2.2,
       ease: 'power2.out',
     })
