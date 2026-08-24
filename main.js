@@ -99,59 +99,100 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
   /* ═══════════════════════════════════════════
-     SECTION 1 — SCROLL ANIMATION
-     Pin the section and cycle through text panels
+     SECTION 1 — SCROLL ANIMATION (CANVAS FRAME SEQUENCE)
+     Pin the section and scrub through video frames
      ═══════════════════════════════════════════ */
   const scrollSection = document.querySelector('.scroll-anim');
   const scrollPanels = gsap.utils.toArray('.scroll-anim__panel');
   const scrollTexts = scrollPanels.map((p) => p.querySelector('.scroll-anim__text'));
+  const canvas = document.getElementById('scrollCanvas');
 
-  if (scrollSection && scrollPanels.length) {
+  if (scrollSection && canvas) {
+    const context = canvas.getContext('2d');
+    const frameCount = 192;
+    const currentFrame = (index) =>
+      `frames/frame_${(index + 1).toString().padStart(4, '0')}.webp`;
+
+    const images = [];
+    const playhead = { frame: 0 };
+
+    function render() {
+      const frameIndex = Math.min(
+        frameCount - 1,
+        Math.max(0, Math.round(playhead.frame))
+      );
+      const img = images[frameIndex];
+      if (img && img.complete && img.naturalWidth > 0) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    // Preload first frame immediately
+    const firstImg = new Image();
+    firstImg.src = currentFrame(0);
+    images[0] = firstImg;
+    firstImg.onload = () => {
+      render();
+    };
+
+    // Preload remaining frames in background
+    for (let i = 1; i < frameCount; i++) {
+      const img = new Image();
+      img.src = currentFrame(i);
+      images[i] = img;
+    }
+
+    // GSAP ScrollTrigger timeline
     const scrollTl = gsap.timeline({
       scrollTrigger: {
         trigger: scrollSection,
         start: 'top top',
-        // Pin for (N panels * 100vh) of scroll distance
-        end: () => `+=${scrollPanels.length * window.innerHeight}`,
+        end: () => `+=${scrollPanels.length * window.innerHeight * 1.25}`,
         pin: true,
-        scrub: 0.6,
+        scrub: 0.4,
         anticipatePin: 1,
       },
     });
 
-    // Animate each text: fade-in → hold → fade-out
+    // Scrub video frames from 0 to 191
+    scrollTl.to(
+      playhead,
+      {
+        frame: frameCount - 1,
+        ease: 'none',
+        duration: scrollPanels.length,
+        onUpdate: render,
+      },
+      0
+    );
+
+    // Synchronize text panels across timeline
+    const stepDuration = scrollPanels.length / scrollTexts.length;
     scrollTexts.forEach((text, i) => {
+      const startTime = i * stepDuration;
+
       // Fade in + slide up
       scrollTl.fromTo(
         text,
-        { opacity: 0, y: 70 },
-        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: stepDuration * 0.4, ease: 'power2.out' },
+        startTime
       );
 
-      // Hold visible
-      scrollTl.to(text, { duration: 0.6 });
-
-      // Fade out + slide up (skip for last panel — leave it visible)
+      // Fade out (skip for last panel)
       if (i < scrollTexts.length - 1) {
-        scrollTl.to(text, {
-          opacity: 0,
-          y: -70,
-          duration: 1,
-          ease: 'power2.in',
-        });
+        scrollTl.to(
+          text,
+          {
+            opacity: 0,
+            y: -60,
+            duration: stepDuration * 0.35,
+            ease: 'power2.in',
+          },
+          startTime + stepDuration * 0.65
+        );
       }
-    });
-
-    // Subtle parallax on background image
-    gsap.to('.scroll-anim__bg-img', {
-      yPercent: 15,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: scrollSection,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-      },
     });
   }
 

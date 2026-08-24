@@ -4,3 +4,6 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Raw video source
+*.mp4

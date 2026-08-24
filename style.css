@@ -387,13 +387,15 @@ textarea {
 .scroll-anim__bg {
   position: absolute;
   inset: 0;
-}
-
-.scroll-anim__bg-img {
+.scroll-anim__canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.25;
+  display: block;
 }
 
 .scroll-anim__bg-overlay {
@@ -401,10 +403,11 @@ textarea {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(26, 16, 12, 0.7) 0%,
-    rgba(26, 16, 12, 0.5) 50%,
-    rgba(26, 16, 12, 0.7) 100%
+    rgba(26, 16, 12, 0.45) 0%,
+    rgba(26, 16, 12, 0.2) 50%,
+    rgba(26, 16, 12, 0.55) 100%
   );
+  pointer-events: none;
 }
 
 .scroll-anim__content {

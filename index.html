@@ -54,17 +54,12 @@
        ═══════════════════════════════════════ -->
   <section class="hero" id="top">
     <div class="hero__bg">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        poster="peakpx (9).jpg"
-        class="hero__video"
+      <img
+        src="peakpx (9).jpg"
+        alt="Luxurious copper-brown kitchen with island and garden view"
+        class="hero__img"
+        fetchpriority="high"
       >
-        <source src="Scroll Animation .mp4" type="video/mp4">
-      </video>
       <div class="hero__overlay"></div>
     </div>
     <div class="hero__content">
@@ -83,16 +78,11 @@
 
   <!-- ═══════════════════════════════════════
        SECTION 1 — SCROLL ANIMATION
-       Pinned full-screen text reveal on scroll
+       Pinned full-screen frame sequence on scroll
        ═══════════════════════════════════════ -->
   <section class="scroll-anim" id="scroll-anim">
     <div class="scroll-anim__bg">
-      <img
-        src="peakpx (3).jpg"
-        alt="Modern open-plan kitchen with island and skylight"
-        class="scroll-anim__bg-img"
-        loading="lazy"
-      >
+      <canvas id="scrollCanvas" class="scroll-anim__canvas" width="1920" height="1080"></canvas>
       <div class="scroll-anim__bg-overlay"></div>
     </div>
     <div class="scroll-anim__content">
