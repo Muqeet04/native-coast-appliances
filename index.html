@@ -119,92 +119,22 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       SECTION 2 — PICTURE BUFFER EFFECT
-       Images blur→sharp on scroll, alternating layout
+       SECTION 2 — PICTURE BUFFER (CURSOR TRAIL EFFECT)
+       Interactive image buffer spawning on cursor movement
        ═══════════════════════════════════════ -->
-  <section class="buffer" id="buffer">
-    <!-- Item 1 — Image Left -->
-    <div class="buffer__item">
-      <div class="buffer__img-wrap">
-        <img
-          src="peakpx (1).jpg"
-          alt="Modern white kitchen with black accents and pendant lights"
-          class="buffer__img"
-          loading="lazy"
-        >
-      </div>
-      <div class="buffer__caption">
-        <span class="buffer__label">01</span>
-        <h3 class="buffer__heading">Scribed to the wall</h3>
-        <p class="buffer__desc">Hand-sprayed shaker fronts, scribed to walls that aren't quite straight — every edge tight, every shadow clean.</p>
-      </div>
-    </div>
+  <section class="cursor-buffer" id="buffer">
+    <div class="cursor-buffer__stage" id="bufferStage">
+      <!-- Dynamic trail container -->
+      <div class="cursor-buffer__trail" id="bufferTrail"></div>
 
-    <!-- Item 2 — Image Right -->
-    <div class="buffer__item buffer__item--reverse">
-      <div class="buffer__img-wrap">
-        <img
-          src="peakpx (2).jpg"
-          alt="Contemporary kitchen with wood island and bar stools"
-          class="buffer__img"
-          loading="lazy"
-        >
-      </div>
-      <div class="buffer__caption">
-        <span class="buffer__label">02</span>
-        <h3 class="buffer__heading">One slab, folded</h3>
-        <p class="buffer__desc">Book-matched marble falls over the island edge — cut wet, polished twice, landed with care.</p>
-      </div>
-    </div>
-
-    <!-- Item 3 — Image Left -->
-    <div class="buffer__item">
-      <div class="buffer__img-wrap">
-        <img
-          src="peakpx (7).jpg"
-          alt="Dark grey kitchen with copper pendant lights and stone counter"
-          class="buffer__img"
-          loading="lazy"
-        >
-      </div>
-      <div class="buffer__caption">
-        <span class="buffer__label">03</span>
-        <h3 class="buffer__heading">Warmed by degrees</h3>
-        <p class="buffer__desc">Unlacquered brass and hand-blown pendants — left to age, wired to dim, warm in every light.</p>
-      </div>
-    </div>
-
-    <!-- Item 4 — Image Right -->
-    <div class="buffer__item buffer__item--reverse">
-      <div class="buffer__img-wrap">
-        <img
-          src="peakpx (4).jpg"
-          alt="Spacious white modern kitchen with island and skylight"
-          class="buffer__img"
-          loading="lazy"
-        >
-      </div>
-      <div class="buffer__caption">
-        <span class="buffer__label">04</span>
-        <h3 class="buffer__heading">Island living</h3>
-        <p class="buffer__desc">The island is the room — prep, pour, perch, and linger. Stone on top, storage beneath, life all around.</p>
-      </div>
-    </div>
-
-    <!-- Item 5 — Image Left -->
-    <div class="buffer__item">
-      <div class="buffer__img-wrap">
-        <img
-          src="peakpx (6).jpg"
-          alt="Contemporary white kitchen with island and pendant lights"
-          class="buffer__img"
-          loading="lazy"
-        >
-      </div>
-      <div class="buffer__caption">
-        <span class="buffer__label">05</span>
-        <h3 class="buffer__heading">Any colour you name</h3>
-        <p class="buffer__desc">Hand-sprayed in our workshop, colour-matched to your walls, your mood, your morning light.</p>
+      <!-- Centered Interactive Content (matching Canva design) -->
+      <div class="cursor-buffer__content">
+        <span class="cursor-buffer__hint">Move your cursor!</span>
+        <h2 class="cursor-buffer__title">What are you in the mood for?</h2>
+        <div class="cursor-buffer__buttons">
+          <a href="#work" class="cursor-buffer__btn cursor-buffer__btn--primary">See the Work</a>
+          <a href="#contact" class="cursor-buffer__btn cursor-buffer__btn--secondary">Get a Quote</a>
+        </div>
       </div>
     </div>
   </section>
@@ -317,31 +247,110 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       GALLERY / WORK SECTION
+       GALLERY / WORK SECTION (HORIZONTAL SCROLL)
+       Pinned horizontal slide sequence on scroll
        ═══════════════════════════════════════ -->
-  <section class="gallery" id="work">
-    <div class="gallery__header">
-      <h2 class="gallery__title">Made &amp; fitted</h2>
-      <p class="gallery__intro">Shaker and stone, oak and marble — a few rooms from the last few seasons.</p>
+  <section class="gallery-wrapper" id="work">
+    <div class="gallery__top">
+      <div class="gallery__header">
+        <span class="gallery__tag">Selected Portfolio</span>
+        <h2 class="gallery__title">Made &amp; fitted</h2>
+        <p class="gallery__intro">Shaker and stone, oak and marble — scroll to explore rooms from recent seasons.</p>
+      </div>
+      <div class="gallery-progress">
+        <div class="gallery-progress__bar" id="galleryProgressBar"></div>
+      </div>
     </div>
-    <div class="gallery__grid">
-      <div class="gallery__item gallery__item--tall">
-        <img src="peakpx (9).jpg" alt="Copper-brown luxury kitchen with garden view" loading="lazy">
-      </div>
-      <div class="gallery__item">
-        <img src="peakpx (11).jpg" alt="Dark modern kitchen with subway tile backsplash" loading="lazy">
-      </div>
-      <div class="gallery__item">
-        <img src="peakpx (12).jpg" alt="Industrial dark wood kitchen with dining table" loading="lazy">
-      </div>
-      <div class="gallery__item gallery__item--tall">
-        <img src="peakpx (13).jpg" alt="Contemporary black and white kitchen with glass pendants" loading="lazy">
-      </div>
-      <div class="gallery__item">
-        <img src="peakpx (10).jpg" alt="Scandinavian oak kitchen with island" loading="lazy">
-      </div>
-      <div class="gallery__item">
-        <img src="peakpx (8).jpg" alt="Rustic farmhouse kitchen with industrial pendants" loading="lazy">
+
+    <div class="gallery__viewport" id="galleryViewport">
+      <div class="gallery__track" id="galleryTrack">
+        <!-- Card 1 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (9).jpg" alt="The Surrey Estate Kitchen" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">01 · Copper &amp; Smoked Oak</span>
+            <h3 class="gallery__card-title">The Surrey Estate</h3>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (2).jpg" alt="The Coastal Haven Kitchen" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">02 · Oak Island &amp; Quartz</span>
+            <h3 class="gallery__card-title">The Coastal Haven</h3>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (7).jpg" alt="The Knightsbridge Dark Minimal" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">03 · Charcoal &amp; Copper Pendants</span>
+            <h3 class="gallery__card-title">The Knightsbridge</h3>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (4).jpg" alt="The Light Pavilion Kitchen" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">04 · Minimal White &amp; Skylight</span>
+            <h3 class="gallery__card-title">The Light Pavilion</h3>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (13).jpg" alt="The Highgate Residence" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">05 · Industrial Luxe Glass</span>
+            <h3 class="gallery__card-title">The Highgate Residence</h3>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (8).jpg" alt="The Cotswolds Farmhouse" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">06 · Raw Timber &amp; Vintage Brass</span>
+            <h3 class="gallery__card-title">The Cotswolds Farmhouse</h3>
+          </div>
+        </article>
+
+        <!-- Card 7 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (11).jpg" alt="The Chelsea Penthouse" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">07 · Subway Tile &amp; Black Shaker</span>
+            <h3 class="gallery__card-title">The Chelsea Penthouse</h3>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="gallery__card">
+          <div class="gallery__card-img-wrap">
+            <img src="peakpx (1).jpg" alt="The Kensington Modern" loading="lazy">
+          </div>
+          <div class="gallery__card-meta">
+            <span class="gallery__card-tag">08 · Contrast Monochrome</span>
+            <h3 class="gallery__card-title">The Kensington Modern</h3>
+          </div>
+        </article>
       </div>
     </div>
   </section>

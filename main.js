@@ -197,24 +197,129 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ═══════════════════════════════════════════
-     SECTION 2 — PICTURE BUFFER EFFECT
-     Images transition from blurred to sharp on scroll
+     SECTION 2 — PICTURE BUFFER (CURSOR TRAIL)
+     Dynamic image buffer trail on mouse/touch movement
      ═══════════════════════════════════════════ */
-  const bufferItems = document.querySelectorAll('.buffer__item');
+  const bufferStage = document.getElementById('bufferStage');
+  const bufferTrail = document.getElementById('bufferTrail');
 
-  bufferItems.forEach((item) => {
-    const imgWrap = item.querySelector('.buffer__img-wrap');
+  if (bufferStage && bufferTrail) {
+    const trailImages = [
+      'peakpx (1).jpg',
+      'peakpx (2).jpg',
+      'peakpx (3).jpg',
+      'peakpx (4).jpg',
+      'peakpx (5).jpg',
+      'peakpx (6).jpg',
+      'peakpx (7).jpg',
+      'peakpx (8).jpg',
+      'peakpx (9).jpg',
+      'peakpx (10).jpg',
+      'peakpx (11).jpg',
+      'peakpx (12).jpg',
+      'peakpx (13).jpg',
+      'peakpx.jpg',
+    ];
 
+    // Preload trail images
+    trailImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    let imageIndex = 0;
+    let lastX = 0;
+    let lastY = 0;
+    let zIndexCounter = 1;
+    const threshold = 70; // Distance in pixels before spawning next image
+
+    function spawnTrailItem(x, y) {
+      const item = document.createElement('div');
+      item.className = 'cursor-buffer__trail-item';
+
+      const rot = (Math.random() * 14 - 7).toFixed(1); // -7deg to +7deg
+      item.style.setProperty('--rot', `${rot}deg`);
+      item.style.left = `${x}px`;
+      item.style.top = `${y}px`;
+      item.style.zIndex = ++zIndexCounter;
+
+      const img = document.createElement('img');
+      img.src = trailImages[imageIndex % trailImages.length];
+      img.alt = 'Bespoke kitchen detail';
+      imageIndex++;
+
+      item.appendChild(img);
+      bufferTrail.appendChild(item);
+
+      // Trigger active state on next animation frame
+      requestAnimationFrame(() => {
+        item.classList.add('is-active');
+      });
+
+      // Maintain max 12 active items in DOM
+      if (bufferTrail.children.length > 12) {
+        const oldest = bufferTrail.firstElementChild;
+        if (oldest) {
+          oldest.classList.add('is-fading');
+          setTimeout(() => oldest.remove(), 700);
+        }
+      }
+
+      // Automatically fade out and remove item
+      setTimeout(() => {
+        if (item.parentNode) {
+          item.classList.add('is-fading');
+          setTimeout(() => {
+            if (item.parentNode) item.remove();
+          }, 700);
+        }
+      }, 2200);
+    }
+
+    function handlePointerMove(e) {
+      const rect = bufferStage.getBoundingClientRect();
+      const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : null);
+      const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : null);
+
+      if (clientX === null || clientY === null) return;
+
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      if (x < 0 || x > rect.width || y < 0 || y > rect.height) return;
+
+      const dist = Math.hypot(x - lastX, y - lastY);
+      if (dist > threshold || (lastX === 0 && lastY === 0)) {
+        spawnTrailItem(x, y);
+        lastX = x;
+        lastY = y;
+      }
+    }
+
+    bufferStage.addEventListener('mousemove', handlePointerMove, { passive: true });
+    bufferStage.addEventListener('touchmove', handlePointerMove, { passive: true });
+
+    // Initial auto-trail intro when scrolled into view
     ScrollTrigger.create({
-      trigger: item,
-      start: 'top 78%',
+      trigger: '#buffer',
+      start: 'top 70%',
       once: true,
-      onEnter() {
-        imgWrap.classList.add('is-revealed');
-        item.classList.add('is-revealed');
+      onEnter: () => {
+        const rect = bufferStage.getBoundingClientRect();
+        const startX = rect.width * 0.2;
+        const endX = rect.width * 0.8;
+        const y = rect.height * 0.52;
+
+        for (let i = 0; i < 4; i++) {
+          setTimeout(() => {
+            const posX = startX + (endX - startX) * (i / 3);
+            const posY = y + (i % 2 === 0 ? -25 : 25);
+            spawnTrailItem(posX, posY);
+          }, i * 260);
+        }
       },
     });
-  });
+  }
 
   /* ─────────────────────────────────────────
      CTA BANNER — staggered entrance
@@ -289,21 +394,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ─────────────────────────────────────────
-     GALLERY — staggered reveal
+     GALLERY — HORIZONTAL SCROLL ANIMATION
+     Pin section and scrub gallery track horizontally
      ───────────────────────────────────────── */
-  const galleryItems = gsap.utils.toArray('.gallery__item');
+  const galleryWrapper = document.getElementById('work');
+  const galleryTrack = document.getElementById('galleryTrack');
+  const galleryProgressBar = document.getElementById('galleryProgressBar');
 
-  if (galleryItems.length) {
-    gsap.from(galleryItems, {
-      y: 40,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.08,
-      ease: 'power2.out',
+  if (galleryWrapper && galleryTrack) {
+    const getScrollAmount = () => {
+      const trackWidth = galleryTrack.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      return -(trackWidth - viewportWidth + 60);
+    };
+
+    gsap.to(galleryTrack, {
+      x: getScrollAmount,
+      ease: 'none',
       scrollTrigger: {
-        trigger: '.gallery__grid',
-        start: 'top 82%',
-        once: true,
+        trigger: galleryWrapper,
+        start: 'top top',
+        end: () => `+=${galleryTrack.scrollWidth - window.innerWidth + window.innerHeight}`,
+        pin: true,
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          if (galleryProgressBar) {
+            galleryProgressBar.style.transform = `scaleX(${self.progress})`;
+          }
+        },
       },
     });
   }
