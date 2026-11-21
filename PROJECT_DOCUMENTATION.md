@@ -1,7 +1,6 @@
-# Native Coast Appliances — Project & Conversation Archive
+# Native Coast Appliances — Project Documentation
 
 **Date:** August 25, 2026  
-**Conversation ID:** `4847329b-efeb-4a4a-9777-f6414bba1a24`  
 **GitHub Repository:** [https://github.com/Muqeet04/native-coast-appliances](https://github.com/Muqeet04/native-coast-appliances)  
 **Live Production URL:** [https://native-coast-appliances.vercel.app](https://native-coast-appliances.vercel.app)
 
@@ -96,7 +95,8 @@ Site1/
 ├── images/
 │   └── kitchen-01.jpg - kitchen-14.jpg  # 14 kitchen photos
 ├── .gitignore                   # Git ignores (.vercel, raw mp4, etc.)
-└── PROJECT_DOCUMENTATION.md     # Full conversation & project summary archive
+├── README.md
+└── PROJECT_DOCUMENTATION.md     # Design and implementation notes
 ```
 
 ---
