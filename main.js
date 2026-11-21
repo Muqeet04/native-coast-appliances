@@ -217,20 +217,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (bufferStage && bufferTrail) {
     const trailImages = [
-      'peakpx (1).jpg',
-      'peakpx (2).jpg',
-      'peakpx (3).jpg',
-      'peakpx (4).jpg',
-      'peakpx (5).jpg',
-      'peakpx (6).jpg',
-      'peakpx (7).jpg',
-      'peakpx (8).jpg',
-      'peakpx (9).jpg',
-      'peakpx (10).jpg',
-      'peakpx (11).jpg',
-      'peakpx (12).jpg',
-      'peakpx (13).jpg',
-      'peakpx.jpg',
+      'images/kitchen-01.jpg',
+      'images/kitchen-02.jpg',
+      'images/kitchen-03.jpg',
+      'images/kitchen-04.jpg',
+      'images/kitchen-05.jpg',
+      'images/kitchen-06.jpg',
+      'images/kitchen-07.jpg',
+      'images/kitchen-08.jpg',
+      'images/kitchen-09.jpg',
+      'images/kitchen-10.jpg',
+      'images/kitchen-11.jpg',
+      'images/kitchen-12.jpg',
+      'images/kitchen-13.jpg',
+      'images/kitchen-14.jpg',
     ];
 
     // Preload trail images

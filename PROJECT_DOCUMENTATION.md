@@ -93,8 +93,8 @@ Site1/
 ├── frames/                      # 192 WebP 1080p animation frames
 │   ├── frame_0001.webp
 │   └── ... frame_0192.webp
-├── peakpx.jpg                   # Local high-res project photography
-├── peakpx (1).jpg - (13).jpg    # 13 additional high-res kitchen photos
+├── images/
+│   └── kitchen-01.jpg - kitchen-14.jpg  # 14 kitchen photos
 ├── .gitignore                   # Git ignores (.vercel, raw mp4, etc.)
 └── PROJECT_DOCUMENTATION.md     # Full conversation & project summary archive
 ```
